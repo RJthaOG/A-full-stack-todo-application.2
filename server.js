@@ -19,6 +19,7 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // Use routes
 app.use('/api', todoRouter);
+app.use(express.static('client'));
 
 // Basic route
 app.get('/', (req, res) => {
@@ -28,4 +29,12 @@ app.get('/', (req, res) => {
 // Start server
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
+});
+
+process.on("SIGINT", () => {
+  console.log("Stopping server...");
+  server.close(() => {
+    console.log("Server stopped. Port released.");
+    process.exit(0);
+  });
 });
