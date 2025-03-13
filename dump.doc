@@ -1,0 +1,19 @@
+// Get DOM HTML Elements
+
+// Fetch all todos when page loads
+async function fetchTodos() {
+// add your code
+}
+
+// Display todos in the list
+function displayTodos(todos) {
+// add your code
+}
+
+// Handle form submission to create a todo 
+todoForm.addEventListener('submit', async (e) => {
+// add your code to create a todo  
+});
+
+// Load todos when page loads
+fetchTodos();
