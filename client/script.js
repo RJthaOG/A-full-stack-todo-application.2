@@ -26,7 +26,7 @@ function displayTodos(todos) {
     todoHTML += `
       <li>
         ${todo.title}
-        <button onclick="removeTodo('${todo.id}')">DELETE</button>
+        <button onclick="removeTodo('${todo._id}')">DELETE</button>
       </li>
     `;
   });
