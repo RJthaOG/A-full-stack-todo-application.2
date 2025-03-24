@@ -35,4 +35,16 @@ ul {
 li {
     padding: 10px;
     border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+li button {
+    background-color: #f44336;
+    padding: 5px 10px;
+}
+
+li button:hover {
+    background-color: #e53935;
 }

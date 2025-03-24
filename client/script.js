@@ -2,6 +2,7 @@
 const form = document.getElementById("todoForm");
 const list = document.getElementById("todoList");
 const input = document.getElementById("todoInput");
+
 // Fetch all todos when page loads
 async function fetchTodos() {
   const url = "/api/todos";
@@ -23,29 +24,47 @@ function displayTodos(todos) {
   let todoHTML = "";
   todos.forEach((todo) => {
     todoHTML += `
-             <li> ${todo.title} </li> 
-             `;
+      <li>
+        ${todo.title}
+        <button onclick="removeTodo('${todo.id}')">DELETE</button>
+      </li>
+    `;
   });
   list.innerHTML = todoHTML;
 }
 
 // Handle form submission
-todoForm.addEventListener("submit", async (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
   try {
-    const response = await fetch("/api/todos", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      // Automatically converted to "username=example&password=password"
-      body: JSON.stringify({ title: input.value }),
-    });
     fetchTodos();
   } catch (error) {
     console.error(error.message);
   }
 });
+
+// Remove a todo item
+async function removeTodo(id) {
+  const url = `/api/todos/${id}`;
+  try {
+    const response = await fetch(url, {
+      method: "DELETE",
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    fetchTodos();
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+list.addEventListener("click", (e) => {
+  if (e.target.classList.contains("remove-btn")) {
+    const id = e.target.parentElement.getAttribute("data-id");
+    removeTodo(id);
+  }
+});
+
 // Load todos when page loads
 fetchTodos();
-// npm run dev
