@@ -32,8 +32,6 @@ router.post('/todos', async (req, res) => {
     }
 });
 
-export { router as todoRouter };
-
 // REMOVE todos
 router.delete('/todos/:id', async (req, res) => {
     const { id } = req.params;
